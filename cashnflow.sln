@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cashnflow", "cashnflow.spa/cashnflow.csproj", "{AEDC59AC-F13B-4252-8952-9F8F365368CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cashnflow.App", "cashnflow.spa\Cashnflow.App.csproj", "{AEDC59AC-F13B-4252-8952-9F8F365368CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cashnflow.Repository", "cashnflow.repository\Cashnflow.Repository.csproj", "{ED0666F7-DBE6-470F-BCB7-57A66887642B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cashnflow.Console", "Cashnflow.Console\Cashnflow.Console.csproj", "{814CD606-4743-49DE-85A5-4C2520CC7B22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +19,19 @@ Global
 		{AEDC59AC-F13B-4252-8952-9F8F365368CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEDC59AC-F13B-4252-8952-9F8F365368CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEDC59AC-F13B-4252-8952-9F8F365368CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED0666F7-DBE6-470F-BCB7-57A66887642B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED0666F7-DBE6-470F-BCB7-57A66887642B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED0666F7-DBE6-470F-BCB7-57A66887642B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED0666F7-DBE6-470F-BCB7-57A66887642B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{814CD606-4743-49DE-85A5-4C2520CC7B22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{814CD606-4743-49DE-85A5-4C2520CC7B22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{814CD606-4743-49DE-85A5-4C2520CC7B22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{814CD606-4743-49DE-85A5-4C2520CC7B22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4448AC08-9FE3-4495-A007-7FDB7D1ADF61}
 	EndGlobalSection
 EndGlobal
