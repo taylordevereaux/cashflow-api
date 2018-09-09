@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cashnflow.App", "cashnflow.spa\Cashnflow.App.csproj", "{AEDC59AC-F13B-4252-8952-9F8F365368CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cashnflow.App", "Cashnflow.App\Cashnflow.App.csproj", "{AEDC59AC-F13B-4252-8952-9F8F365368CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cashnflow.Repository", "cashnflow.repository\Cashnflow.Repository.csproj", "{ED0666F7-DBE6-470F-BCB7-57A66887642B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cashnflow.Repository", "Cashnflow.Repository\Cashnflow.Repository.csproj", "{ED0666F7-DBE6-470F-BCB7-57A66887642B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cashnflow.Console", "Cashnflow.Console\Cashnflow.Console.csproj", "{814CD606-4743-49DE-85A5-4C2520CC7B22}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cashnflow.Cli", "Cashnflow.Cli\Cashnflow.Cli.csproj", "{814CD606-4743-49DE-85A5-4C2520CC7B22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cashnflow.Core", "Cashnflow.Core\Cashnflow.Core.csproj", "{EF98EBE2-FB05-4865-93EC-75793256111A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{814CD606-4743-49DE-85A5-4C2520CC7B22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{814CD606-4743-49DE-85A5-4C2520CC7B22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{814CD606-4743-49DE-85A5-4C2520CC7B22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF98EBE2-FB05-4865-93EC-75793256111A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF98EBE2-FB05-4865-93EC-75793256111A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF98EBE2-FB05-4865-93EC-75793256111A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF98EBE2-FB05-4865-93EC-75793256111A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
