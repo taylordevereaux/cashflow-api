@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Cashnflow.Core
+namespace Cashnflow.App
 {
     public static class RecurringDatesExtensions
     {
