@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Cashnflow.Core;
-using Cashnflow.Repository;
+using Cashnflow.App;
+using Cashnflow.App.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cashnflow.Cli
 {
     class Program
     {
-
         public static async Task Main(string[] args)
         {
+
+
             FinanceDBContext context = new FinanceDBContext();
             var repeatTransactions = await context.RepeatTransaction
                 .Include(x => x.Account)

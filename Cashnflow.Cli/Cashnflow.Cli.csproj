@@ -7,8 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Cashnflow.Core\Cashnflow.Core.csproj" />
-    <ProjectReference Include="..\Cashnflow.Repository\Cashnflow.Repository.csproj" />
+    <ProjectReference Include="..\Cashnflow.App\Cashnflow.App.csproj" />
   </ItemGroup>
 
 </Project>
