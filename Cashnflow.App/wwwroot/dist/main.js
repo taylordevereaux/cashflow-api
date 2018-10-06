@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "90d631e5c94f88023d9e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "6449d89fb204b7a0b9a3"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -13140,7 +13140,7 @@ exports = module.exports = __webpack_require__(24)();
 
 
 // module
-exports.push([module.i, ".main-nav li .glyphicon {\n    margin-right: 10px;\n}\n\n/* Highlighting rules for nav menu items */\n.main-nav li a.active,\n.main-nav li a.active:hover,\n.main-nav li a.active:focus {\n    background-color: #4189C7;\n    color: white;\n}\n\n/* Keep the nav menu independent of scrolling and on top of other items */\n.main-nav {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    z-index: 1;\n}\n\n@media (max-width: 767px) {\n    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */\n    body {\n        padding-top: 50px;\n    }\n}\n\n@media (min-width: 768px) {\n    /* On small screens, convert the nav menu to a vertical sidebar */\n    .main-nav {\n        height: 100%;\n        width: calc(25% - 20px);\n    }\n    .main-nav .navbar {\n        border-radius: 0px;\n        border-width: 0px;\n        height: 100%;\n    }\n    .main-nav .navbar-header {\n        float: none;\n    }\n    .main-nav .navbar-collapse {\n        border-top: 1px solid #444;\n        padding: 0px;\n    }\n    .main-nav .navbar ul {\n        float: none;\n    }\n    .main-nav .navbar li {\n        float: none;\n        font-size: 15px;\n        margin: 6px;\n    }\n    .main-nav .navbar li a {\n        padding: 10px 16px;\n        border-radius: 4px;\n    }\n    .main-nav .navbar a {\n        /* If a menu item's text is too long, truncate it */\n        width: 100%;\n        white-space: nowrap;\n        overflow: hidden;\n        text-overflow: ellipsis;\n    }\n}", ""]);
+exports.push([module.i, ".main-nav li .glyphicon {\r\n    margin-right: 10px;\r\n}\r\n\r\n/* Highlighting rules for nav menu items */\r\n.main-nav li a.active,\r\n.main-nav li a.active:hover,\r\n.main-nav li a.active:focus {\r\n    background-color: #4189C7;\r\n    color: white;\r\n}\r\n\r\n/* Keep the nav menu independent of scrolling and on top of other items */\r\n.main-nav {\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    z-index: 1;\r\n}\r\n\r\n@media (max-width: 767px) {\r\n    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */\r\n    body {\r\n        padding-top: 50px;\r\n    }\r\n}\r\n\r\n@media (min-width: 768px) {\r\n    /* On small screens, convert the nav menu to a vertical sidebar */\r\n    .main-nav {\r\n        height: 100%;\r\n        width: calc(25% - 20px);\r\n    }\r\n    .main-nav .navbar {\r\n        border-radius: 0px;\r\n        border-width: 0px;\r\n        height: 100%;\r\n    }\r\n    .main-nav .navbar-header {\r\n        float: none;\r\n    }\r\n    .main-nav .navbar-collapse {\r\n        border-top: 1px solid #444;\r\n        padding: 0px;\r\n    }\r\n    .main-nav .navbar ul {\r\n        float: none;\r\n    }\r\n    .main-nav .navbar li {\r\n        float: none;\r\n        font-size: 15px;\r\n        margin: 6px;\r\n    }\r\n    .main-nav .navbar li a {\r\n        padding: 10px 16px;\r\n        border-radius: 4px;\r\n    }\r\n    .main-nav .navbar a {\r\n        /* If a menu item's text is too long, truncate it */\r\n        width: 100%;\r\n        white-space: nowrap;\r\n        overflow: hidden;\r\n        text-overflow: ellipsis;\r\n    }\r\n}", ""]);
 
 // exports
 
@@ -13154,7 +13154,7 @@ exports = module.exports = __webpack_require__(24)();
 
 
 // module
-exports.push([module.i, "\n.slide-enter-active, .slide-leave-active {\n  transition: max-height .35s\n}\n.slide-enter, .slide-leave-to {\n  max-height: 0px;\n}\n.slide-enter-to, .slide-leave {\n  max-height: 20em;\n}\n", "", {"version":3,"sources":["C:/Workspace/VSTS/cashnflow/cashnflow.spa/ClientApp/components/nav-menu.vue?9da6398a"],"names":[],"mappings":";AAgDA;EACA,2BAAA;CACA;AACA;EACA,gBAAA;CACA;AAEA;EACA,iBAAA;CACA","file":"nav-menu.vue","sourcesContent":["<template>\n    <div class=\"main-nav\">\n        <div class=\"navbar navbar-inverse\">\n            <div class=\"navbar-header\">\n                <button type=\"button\" class=\"navbar-toggle\" v-on:click=\"toggleCollapsed\">\n                        <span class=\"sr-only\">Toggle navigation</span>\n                        <span class=\"icon-bar\"></span>\n                        <span class=\"icon-bar\"></span>\n                        <span class=\"icon-bar\"></span>\n                    </button>\n                <a class=\"navbar-brand\" href=\"/\">ASP.NET Core with Vue.js 2</a>\n            </div>\n            <div class=\"clearfix\"></div>\n            <transition name=\"slide\">\n                <div class=\"navbar-collapse collapse in\" v-show=\"!collapsed\">\n                    <ul class=\"nav navbar-nav\">\n                        <li v-for=\"route in routes\">\n                            <!-- TODO: highlight active link -->\n                            <router-link :to=\"route.path\">\n                                <span :class=\"route.style\"></span> {{ route.display }}\n                            </router-link>\n                        </li>\n                    </ul>\n                </div>\n            </transition>\n        </div>\n    </div>\n</template>\n\n<script>\nimport { routes } from '../routes'\n\nexport default {\n    data() {\n        return {\n            routes,\n            collapsed : true\n        }\n    },\n    methods: {\n        toggleCollapsed: function(event){\n            this.collapsed = !this.collapsed;\n        }\n    }\n}\n</script>\n\n<style>\n.slide-enter-active, .slide-leave-active {\n  transition: max-height .35s\n}\n.slide-enter, .slide-leave-to {\n  max-height: 0px;\n}\n\n.slide-enter-to, .slide-leave {\n  max-height: 20em;\n}\n</style>"],"sourceRoot":""}]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"app-root.vue","sourceRoot":""}]);
 
 // exports
 
@@ -13168,7 +13168,7 @@ exports = module.exports = __webpack_require__(24)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"home-page.vue","sourceRoot":""}]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"fetch-data.vue","sourceRoot":""}]);
 
 // exports
 
@@ -13182,7 +13182,7 @@ exports = module.exports = __webpack_require__(24)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"app-root.vue","sourceRoot":""}]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"home-page.vue","sourceRoot":""}]);
 
 // exports
 
@@ -13196,7 +13196,7 @@ exports = module.exports = __webpack_require__(24)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"fetch-data.vue","sourceRoot":""}]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"counter-example.vue","sourceRoot":""}]);
 
 // exports
 
@@ -13210,7 +13210,7 @@ exports = module.exports = __webpack_require__(24)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"counter-example.vue","sourceRoot":""}]);
+exports.push([module.i, "\n.slide-enter-active, .slide-leave-active {\r\n  transition: max-height .35s\n}\n.slide-enter, .slide-leave-to {\r\n  max-height: 0px;\n}\n.slide-enter-to, .slide-leave {\r\n  max-height: 20em;\n}\r\n", "", {"version":3,"sources":["C:/Workspace/VSTS/cashnflow/Cashnflow.App/ClientApp/components/nav-menu.vue?9b41e9f6"],"names":[],"mappings":";AAgDA;EACA,2BAAA;CACA;AACA;EACA,gBAAA;CACA;AAEA;EACA,iBAAA;CACA","file":"nav-menu.vue","sourcesContent":["<template>\r\n    <div class=\"main-nav\">\r\n        <div class=\"navbar navbar-inverse\">\r\n            <div class=\"navbar-header\">\r\n                <button type=\"button\" class=\"navbar-toggle\" v-on:click=\"toggleCollapsed\">\r\n                        <span class=\"sr-only\">Toggle navigation</span>\r\n                        <span class=\"icon-bar\"></span>\r\n                        <span class=\"icon-bar\"></span>\r\n                        <span class=\"icon-bar\"></span>\r\n                    </button>\r\n                <a class=\"navbar-brand\" href=\"/\">ASP.NET Core with Vue.js 2</a>\r\n            </div>\r\n            <div class=\"clearfix\"></div>\r\n            <transition name=\"slide\">\r\n                <div class=\"navbar-collapse collapse in\" v-show=\"!collapsed\">\r\n                    <ul class=\"nav navbar-nav\">\r\n                        <li v-for=\"route in routes\">\r\n                            <!-- TODO: highlight active link -->\r\n                            <router-link :to=\"route.path\">\r\n                                <span :class=\"route.style\"></span> {{ route.display }}\r\n                            </router-link>\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n            </transition>\r\n        </div>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\nimport { routes } from '../routes'\r\n\r\nexport default {\r\n    data() {\r\n        return {\r\n            routes,\r\n            collapsed : true\r\n        }\r\n    },\r\n    methods: {\r\n        toggleCollapsed: function(event){\r\n            this.collapsed = !this.collapsed;\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style>\r\n.slide-enter-active, .slide-leave-active {\r\n  transition: max-height .35s\r\n}\r\n.slide-enter, .slide-leave-to {\r\n  max-height: 0px;\r\n}\r\n\r\n.slide-enter-to, .slide-leave {\r\n  max-height: 20em;\r\n}\r\n</style>"],"sourceRoot":""}]);
 
 // exports
 
@@ -14304,19 +14304,19 @@ module.exports = Html5Entities;
 
 
 /* styles */
-__webpack_require__(235)
+__webpack_require__(234)
 
 var Component = __webpack_require__(35)(
   /* script */
   __webpack_require__(117),
   /* template */
-  __webpack_require__(230),
+  __webpack_require__(229),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Workspace\\VSTS\\cashnflow\\cashnflow.spa\\ClientApp\\components\\counter-example.vue"
+Component.options.__file = "C:\\Workspace\\VSTS\\cashnflow\\Cashnflow.App\\ClientApp\\components\\counter-example.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] counter-example.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -14327,9 +14327,9 @@ if (true) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-f96a7d92", Component.options)
+    hotAPI.createRecord("data-v-c6c714cc", Component.options)
   } else {
-    hotAPI.reload("data-v-f96a7d92", Component.options)
+    hotAPI.reload("data-v-c6c714cc", Component.options)
   }
 })()}
 
@@ -14342,19 +14342,19 @@ module.exports = Component.exports
 
 
 /* styles */
-__webpack_require__(234)
+__webpack_require__(232)
 
 var Component = __webpack_require__(35)(
   /* script */
   __webpack_require__(118),
   /* template */
-  __webpack_require__(229),
+  __webpack_require__(227),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Workspace\\VSTS\\cashnflow\\cashnflow.spa\\ClientApp\\components\\fetch-data.vue"
+Component.options.__file = "C:\\Workspace\\VSTS\\cashnflow\\Cashnflow.App\\ClientApp\\components\\fetch-data.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] fetch-data.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -14365,9 +14365,9 @@ if (true) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-e9cf0aa2", Component.options)
+    hotAPI.createRecord("data-v-7e8a546c", Component.options)
   } else {
-    hotAPI.reload("data-v-e9cf0aa2", Component.options)
+    hotAPI.reload("data-v-7e8a546c", Component.options)
   }
 })()}
 
@@ -14380,19 +14380,19 @@ module.exports = Component.exports
 
 
 /* styles */
-__webpack_require__(232)
+__webpack_require__(233)
 
 var Component = __webpack_require__(35)(
   /* script */
   __webpack_require__(119),
   /* template */
-  __webpack_require__(227),
+  __webpack_require__(228),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Workspace\\VSTS\\cashnflow\\cashnflow.spa\\ClientApp\\components\\home-page.vue"
+Component.options.__file = "C:\\Workspace\\VSTS\\cashnflow\\Cashnflow.App\\ClientApp\\components\\home-page.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] home-page.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -14403,9 +14403,9 @@ if (true) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-293c9fdb", Component.options)
+    hotAPI.createRecord("data-v-850bcb04", Component.options)
   } else {
-    hotAPI.reload("data-v-293c9fdb", Component.options)
+    hotAPI.reload("data-v-850bcb04", Component.options)
   }
 })()}
 
@@ -19318,19 +19318,19 @@ if(true) {
 
 
 /* styles */
-__webpack_require__(233)
+__webpack_require__(231)
 
 var Component = __webpack_require__(35)(
   /* script */
   __webpack_require__(116),
   /* template */
-  __webpack_require__(228),
+  __webpack_require__(226),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Workspace\\VSTS\\cashnflow\\cashnflow.spa\\ClientApp\\components\\app-root.vue"
+Component.options.__file = "C:\\Workspace\\VSTS\\cashnflow\\Cashnflow.App\\ClientApp\\components\\app-root.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] app-root.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -19341,9 +19341,9 @@ if (true) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-8c5c7240", Component.options)
+    hotAPI.createRecord("data-v-3a78ebdd", Component.options)
   } else {
-    hotAPI.reload("data-v-8c5c7240", Component.options)
+    hotAPI.reload("data-v-3a78ebdd", Component.options)
   }
 })()}
 
@@ -19356,19 +19356,19 @@ module.exports = Component.exports
 
 
 /* styles */
-__webpack_require__(231)
+__webpack_require__(235)
 
 var Component = __webpack_require__(35)(
   /* script */
   __webpack_require__(120),
   /* template */
-  __webpack_require__(226),
+  __webpack_require__(230),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Workspace\\VSTS\\cashnflow\\cashnflow.spa\\ClientApp\\components\\nav-menu.vue"
+Component.options.__file = "C:\\Workspace\\VSTS\\cashnflow\\Cashnflow.App\\ClientApp\\components\\nav-menu.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] nav-menu.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -19379,9 +19379,9 @@ if (true) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-041e681b", Component.options)
+    hotAPI.createRecord("data-v-f674e5d0", Component.options)
   } else {
-    hotAPI.reload("data-v-041e681b", Component.options)
+    hotAPI.reload("data-v-f674e5d0", Component.options)
   }
 })()}
 
@@ -19390,6 +19390,133 @@ module.exports = Component.exports
 
 /***/ }),
 /* 226 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "container-fluid",
+    attrs: {
+      "id": "app"
+    }
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-sm-3"
+  }, [_c('nav-menu', {
+    attrs: {
+      "params": "route: route"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-9"
+  }, [_c('router-view')], 1)])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (true) {
+  module.hot.accept()
+  if (module.hot.data) {
+     __webpack_require__(6).rerender("data-v-3a78ebdd", module.exports)
+  }
+}
+
+/***/ }),
+/* 227 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('h1', [_vm._v("Weather forecast")]), _vm._v(" "), _c('p', [_vm._v("This component demonstrates fetching data from the server.")]), _vm._v(" "), (!_vm.forecasts) ? _c('p', [_c('em', [_vm._v("Loading...")])]) : _vm._e(), _vm._v(" "), (_vm.forecasts) ? _c('table', {
+    staticClass: "table"
+  }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.forecasts), function(forecast) {
+    return _c('tr', [_c('td', [_vm._v(_vm._s(forecast.dateFormatted))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(forecast.temperatureC))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(forecast.temperatureF))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(forecast.summary))])])
+  }))]) : _vm._e()])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', [_c('tr', [_c('th', [_vm._v("Date")]), _vm._v(" "), _c('th', [_vm._v("Temp. (C)")]), _vm._v(" "), _c('th', [_vm._v("Temp. (F)")]), _vm._v(" "), _c('th', [_vm._v("Summary")])])])
+}]}
+module.exports.render._withStripped = true
+if (true) {
+  module.hot.accept()
+  if (module.hot.data) {
+     __webpack_require__(6).rerender("data-v-7e8a546c", module.exports)
+  }
+}
+
+/***/ }),
+/* 228 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('h1', [_vm._v("Hello, world!")]), _vm._v(" "), _c('p', [_vm._v("Welcome to your new single-page application, built with:")]), _vm._v(" "), _c('ul', [_c('li', [_c('a', {
+    attrs: {
+      "href": "https://get.asp.net/"
+    }
+  }, [_vm._v("ASP.NET Core")]), _vm._v(" and "), _c('a', {
+    attrs: {
+      "href": "https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx"
+    }
+  }, [_vm._v("C#")]), _vm._v("                    for cross-platform server-side code")]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "https://vuejs.org/"
+    }
+  }, [_vm._v("Vue.js")]), _vm._v(" for client-side code")]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "https://webpack.js.org/"
+    }
+  }, [_vm._v("Webpack")]), _vm._v(" for building and bundling client-side resources")]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "http://getbootstrap.com/"
+    }
+  }, [_vm._v("Bootstrap")]), _vm._v(" for layout and styling")]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "api/SampleData/WeatherForecasts"
+    }
+  }, [_vm._v("API sample data")]), _vm._v(" from the dotnet controller")])]), _vm._v(" "), _c('p', [_vm._v("To help you get started, we've also set up:")]), _vm._v(" "), _c('ul', [_c('li', [_c('strong', [_vm._v("Client-side navigation")]), _vm._v(". For example, click "), _c('em', [_vm._v("Counter")]), _vm._v(" then "), _c('em', [_vm._v("Back")]), _vm._v(" to return\n            here.")]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Webpack dev middleware")]), _vm._v(". In development mode, there's no need to run the "), _c('code', [_vm._v("webpack")]), _vm._v("                    build tool. Your client-side resources are dynamically built on demand. Updates are available as soon\n            as you modify any file.")]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Hot module replacement")]), _vm._v(". In development mode, you don't even need to reload the page after\n            making most changes. Within seconds of saving changes to files, your Vue.js app will be rebuilt and\n            a new instance injected is into the page.")]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Code splitting and lazy loading")]), _vm._v(". Vue.js components may optionally be bundled individually and\n            loaded on demand. For example, the code and template for 'Counter' is not loaded until you navigate to\n            it..")]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Efficient production builds")]), _vm._v(". In production mode, development-time features are disabled,\n            and the "), _c('code', [_vm._v("webpack")]), _vm._v(" build tool produces minified static CSS and JavaScript files.")])]), _vm._v(" "), _c('br'), _c('br'), _vm._v(" "), _c('h2', [_vm._v("This Template brought to you by "), _c('a', {
+    attrs: {
+      "href": "http://DevHelp.Online"
+    }
+  }, [_vm._v("DevHelp.Online")])]), _vm._v(" "), _c('strong', [_vm._v("Consulting | Development | Training | Workshops")]), _c('br'), _vm._v(" "), _c('p', [_vm._v("Get your Team or Application up to speed by working with some of the leading industry experts in JavaScript & ASP.NET!")]), _vm._v(" "), _c('strong', [_vm._v("Contact us today: ")]), _vm._v(" "), _c('p', [_c('a', {
+    attrs: {
+      "href": "mailto:hello@devhelp.online"
+    }
+  }, [_vm._v("Hello@DevHelp.Online")])])])
+}]}
+module.exports.render._withStripped = true
+if (true) {
+  module.hot.accept()
+  if (module.hot.data) {
+     __webpack_require__(6).rerender("data-v-850bcb04", module.exports)
+  }
+}
+
+/***/ }),
+/* 229 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('h1', [_vm._v("Counter")]), _vm._v(" "), _c('p', [_vm._v("This is a simple example of a Vue.js component & Vuex")]), _vm._v(" "), _c('p', [_vm._v("\n    Current count (Vuex): "), _c('strong', [_vm._v(_vm._s(_vm.currentCount))])]), _vm._v(" "), _c('p', [_vm._v("\n    Auto count: "), _c('strong', [_vm._v(_vm._s(_vm.autoCount))])]), _vm._v(" "), _c('button', {
+    on: {
+      "click": function($event) {
+        _vm.incrementCounter()
+      }
+    }
+  }, [_vm._v("Increment")]), _vm._v(" "), _c('button', {
+    on: {
+      "click": function($event) {
+        _vm.resetCounter()
+      }
+    }
+  }, [_vm._v("Reset")])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (true) {
+  module.hot.accept()
+  if (module.hot.data) {
+     __webpack_require__(6).rerender("data-v-c6c714cc", module.exports)
+  }
+}
+
+/***/ }),
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -19450,134 +19577,7 @@ module.exports.render._withStripped = true
 if (true) {
   module.hot.accept()
   if (module.hot.data) {
-     __webpack_require__(6).rerender("data-v-041e681b", module.exports)
-  }
-}
-
-/***/ }),
-/* 227 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('h1', [_vm._v("Hello, world!")]), _vm._v(" "), _c('p', [_vm._v("Welcome to your new single-page application, built with:")]), _vm._v(" "), _c('ul', [_c('li', [_c('a', {
-    attrs: {
-      "href": "https://get.asp.net/"
-    }
-  }, [_vm._v("ASP.NET Core")]), _vm._v(" and "), _c('a', {
-    attrs: {
-      "href": "https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx"
-    }
-  }, [_vm._v("C#")]), _vm._v("                    for cross-platform server-side code")]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "https://vuejs.org/"
-    }
-  }, [_vm._v("Vue.js")]), _vm._v(" for client-side code")]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "https://webpack.js.org/"
-    }
-  }, [_vm._v("Webpack")]), _vm._v(" for building and bundling client-side resources")]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "http://getbootstrap.com/"
-    }
-  }, [_vm._v("Bootstrap")]), _vm._v(" for layout and styling")]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "api/SampleData/WeatherForecasts"
-    }
-  }, [_vm._v("API sample data")]), _vm._v(" from the dotnet controller")])]), _vm._v(" "), _c('p', [_vm._v("To help you get started, we've also set up:")]), _vm._v(" "), _c('ul', [_c('li', [_c('strong', [_vm._v("Client-side navigation")]), _vm._v(". For example, click "), _c('em', [_vm._v("Counter")]), _vm._v(" then "), _c('em', [_vm._v("Back")]), _vm._v(" to return\n            here.")]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Webpack dev middleware")]), _vm._v(". In development mode, there's no need to run the "), _c('code', [_vm._v("webpack")]), _vm._v("                    build tool. Your client-side resources are dynamically built on demand. Updates are available as soon\n            as you modify any file.")]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Hot module replacement")]), _vm._v(". In development mode, you don't even need to reload the page after\n            making most changes. Within seconds of saving changes to files, your Vue.js app will be rebuilt and\n            a new instance injected is into the page.")]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Code splitting and lazy loading")]), _vm._v(". Vue.js components may optionally be bundled individually and\n            loaded on demand. For example, the code and template for 'Counter' is not loaded until you navigate to\n            it..")]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Efficient production builds")]), _vm._v(". In production mode, development-time features are disabled,\n            and the "), _c('code', [_vm._v("webpack")]), _vm._v(" build tool produces minified static CSS and JavaScript files.")])]), _vm._v(" "), _c('br'), _c('br'), _vm._v(" "), _c('h2', [_vm._v("This Template brought to you by "), _c('a', {
-    attrs: {
-      "href": "http://DevHelp.Online"
-    }
-  }, [_vm._v("DevHelp.Online")])]), _vm._v(" "), _c('strong', [_vm._v("Consulting | Development | Training | Workshops")]), _c('br'), _vm._v(" "), _c('p', [_vm._v("Get your Team or Application up to speed by working with some of the leading industry experts in JavaScript & ASP.NET!")]), _vm._v(" "), _c('strong', [_vm._v("Contact us today: ")]), _vm._v(" "), _c('p', [_c('a', {
-    attrs: {
-      "href": "mailto:hello@devhelp.online"
-    }
-  }, [_vm._v("Hello@DevHelp.Online")])])])
-}]}
-module.exports.render._withStripped = true
-if (true) {
-  module.hot.accept()
-  if (module.hot.data) {
-     __webpack_require__(6).rerender("data-v-293c9fdb", module.exports)
-  }
-}
-
-/***/ }),
-/* 228 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "container-fluid",
-    attrs: {
-      "id": "app"
-    }
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-3"
-  }, [_c('nav-menu', {
-    attrs: {
-      "params": "route: route"
-    }
-  })], 1), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-9"
-  }, [_c('router-view')], 1)])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (true) {
-  module.hot.accept()
-  if (module.hot.data) {
-     __webpack_require__(6).rerender("data-v-8c5c7240", module.exports)
-  }
-}
-
-/***/ }),
-/* 229 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('h1', [_vm._v("Weather forecast")]), _vm._v(" "), _c('p', [_vm._v("This component demonstrates fetching data from the server.")]), _vm._v(" "), (!_vm.forecasts) ? _c('p', [_c('em', [_vm._v("Loading...")])]) : _vm._e(), _vm._v(" "), (_vm.forecasts) ? _c('table', {
-    staticClass: "table"
-  }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.forecasts), function(forecast) {
-    return _c('tr', [_c('td', [_vm._v(_vm._s(forecast.dateFormatted))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(forecast.temperatureC))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(forecast.temperatureF))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(forecast.summary))])])
-  }))]) : _vm._e()])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("Date")]), _vm._v(" "), _c('th', [_vm._v("Temp. (C)")]), _vm._v(" "), _c('th', [_vm._v("Temp. (F)")]), _vm._v(" "), _c('th', [_vm._v("Summary")])])])
-}]}
-module.exports.render._withStripped = true
-if (true) {
-  module.hot.accept()
-  if (module.hot.data) {
-     __webpack_require__(6).rerender("data-v-e9cf0aa2", module.exports)
-  }
-}
-
-/***/ }),
-/* 230 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('h1', [_vm._v("Counter")]), _vm._v(" "), _c('p', [_vm._v("This is a simple example of a Vue.js component & Vuex")]), _vm._v(" "), _c('p', [_vm._v("\n    Current count (Vuex): "), _c('strong', [_vm._v(_vm._s(_vm.currentCount))])]), _vm._v(" "), _c('p', [_vm._v("\n    Auto count: "), _c('strong', [_vm._v(_vm._s(_vm.autoCount))])]), _vm._v(" "), _c('button', {
-    on: {
-      "click": function($event) {
-        _vm.incrementCounter()
-      }
-    }
-  }, [_vm._v("Increment")]), _vm._v(" "), _c('button', {
-    on: {
-      "click": function($event) {
-        _vm.resetCounter()
-      }
-    }
-  }, [_vm._v("Reset")])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (true) {
-  module.hot.accept()
-  if (module.hot.data) {
-     __webpack_require__(6).rerender("data-v-f96a7d92", module.exports)
+     __webpack_require__(6).rerender("data-v-f674e5d0", module.exports)
   }
 }
 
@@ -19592,7 +19592,7 @@ var content = __webpack_require__(64);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(36)("37607fee", content, false);
+var update = __webpack_require__(36)("004cbff6", content, false);
 // Hot Module Replacement
 if(true) {
  // When the styles change, update the <style> tags
@@ -19618,7 +19618,7 @@ var content = __webpack_require__(65);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(36)("51e67dae", content, false);
+var update = __webpack_require__(36)("5c25c08d", content, false);
 // Hot Module Replacement
 if(true) {
  // When the styles change, update the <style> tags
@@ -19644,7 +19644,7 @@ var content = __webpack_require__(66);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(36)("313ebc09", content, false);
+var update = __webpack_require__(36)("8d2b1284", content, false);
 // Hot Module Replacement
 if(true) {
  // When the styles change, update the <style> tags
@@ -19670,7 +19670,7 @@ var content = __webpack_require__(67);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(36)("182b7ac3", content, false);
+var update = __webpack_require__(36)("3fce446c", content, false);
 // Hot Module Replacement
 if(true) {
  // When the styles change, update the <style> tags
@@ -19696,7 +19696,7 @@ var content = __webpack_require__(68);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(36)("131daa50", content, false);
+var update = __webpack_require__(36)("280a1372", content, false);
 // Hot Module Replacement
 if(true) {
  // When the styles change, update the <style> tags

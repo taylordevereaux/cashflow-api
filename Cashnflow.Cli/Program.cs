@@ -10,8 +10,6 @@ namespace Cashnflow.Cli
     {
         public static async Task Main(string[] args)
         {
-
-
             FinanceDBContext context = new FinanceDBContext();
             var repeatTransactions = await context.RepeatTransaction
                 .Include(x => x.Account)
