@@ -84,7 +84,9 @@ namespace Cashnflow.Api.Repository
 
                 entity.Property(e => e.Amount).HasColumnType("decimal(20, 6)");
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.RepeatTypeId).HasColumnName("RepeatTypeID");
 

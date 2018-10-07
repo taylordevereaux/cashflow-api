@@ -10,54 +10,59 @@ namespace Cashnflow.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TransactionsController : ControllerBase
+    public class CashFlowController : ControllerBase
     {
-        private FinanceDBContext _financeDBContext;
+        private readonly FinanceDBContext _context;
 
-        public TransactionsController(FinanceDBContext financeDBContext)
+        public CashFlowController(FinanceDBContext context)
         {
-            _financeDBContext = financeDBContext;
+            _context = context;
         }
 
         // GET api/values
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        [HttpGet("/api/[controller]/summary")]
+        public async Task<IActionResult> GetSummary()
         {
-            var repeatTransactions = await _financeDBContext
+            var repeatTransactions = await _context
                 .RepeatTransaction
                 .Select(x => new
                 {
-                    x.RepeatTransactionId,
                     Account = new
                     {
                         x.Account.Name,
-                        x.Account.AccountId
+                        x.Account.Amount
                     },
                     x.Amount,
                     x.CreatedDate,
                     x.StartDate,
                     TransactionType = new
                     {
-                        x.TransactionType.TransactionTypeConstant,
-                        x.TransactionType.Name
+                        x.TransactionType.TransactionTypeConstant
                     },
                     RepeatType = new
                     {
-                        x.RepeatType.RepeatTypeConstant,
-                        x.RepeatType.Name
+                        x.RepeatType.RepeatTypeConstant
                     },
                 })
                 //.Where(x => x.RepeatTransactionId == id)
                 .ToListAsync();
 
-            return Ok(repeatTransactions);
+            List<DateTime> dates = new List<DateTime>();
+            DateTime now = DateTime.Now;
+            dates.Add(now);
+            dates.Add(now.GetFirstDayOfMonth());
+            dates.Add(now.GetFirstDayAndTimeOfMonth());
+            dates.Add(now.GetLastDayOfMonth());
+            dates.Add(now.GetLastDayAndTimeOfMonth());
+
+            return Ok(dates);
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var repeatTransaction = await _financeDBContext
+            var repeatTransaction = await _context
                 .RepeatTransaction
                 .Select(x => new
                 {
@@ -85,27 +90,6 @@ namespace Cashnflow.Api.Controllers
                 .SingleOrDefaultAsync();
 
             return Ok(repeatTransaction);
-        }
-
-        // POST api/values
-        [HttpPost]
-        public string Post([FromBody] string value)
-        {
-            return $"Posted: {value}";
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public string Put(int id, [FromBody] string value)
-        {
-            return $"Put: {value} for id {id}";
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public string Delete(int id)
-        {
-            return $"Deleted transaction: {id}";
         }
     }
 }

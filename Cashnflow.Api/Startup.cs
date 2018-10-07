@@ -28,7 +28,7 @@ namespace Cashnflow.Api
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddSingleton<FinanceDBContext>();
+            services.AddScoped<FinanceDBContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

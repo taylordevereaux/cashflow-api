@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Cashnflow.App
+namespace Cashnflow.Api
 {
     public static class RecurringDateTimeExtension
     {
@@ -32,25 +32,56 @@ namespace Cashnflow.App
             switch (repeat)
             {
                 case RepeatType.Daily:
-                    date.AddDays(1 * repeatCount);
+                    date = date.AddDays(1 * repeatCount);
                     break;
                 case RepeatType.Weekly:
-                    date.AddDays(7 * repeatCount);
+                    date = date.AddDays(7 * repeatCount);
                     break;
                 case RepeatType.BiWeekly:
-                    date.AddDays(14 * repeatCount);
+                    date = date.AddDays(14 * repeatCount);
                     break;
                 case RepeatType.Monthly:
-                    date.AddMonths(1 * repeatCount);
+                    date = date.AddMonths(1 * repeatCount);
                     break;
                 case RepeatType.Quarterly:
-                    date.AddMonths(3 * repeatCount);
+                    date = date.AddMonths(3 * repeatCount);
                     break;
                 case RepeatType.Yearly:
-                    date.AddYears(1* repeatCount);
+                    date = date.AddYears(1 * repeatCount);
                     break;
             }
             return date;
+        }
+
+        public static DateTime GetLastDayOfMonth(this DateTime date)
+        {
+            date = date.AddMonths(1);
+            date = date.AddDays(-date.Day);
+            return date;
+        }
+        public static DateTime GetLastDayAndTimeOfMonth(this DateTime date)
+        {
+            date = date.AddMonths(1);
+            date = date.GetFirstDayAndTimeOfMonth();
+            return date.AddSeconds(-1);
+        }
+        /// <summary>
+        /// Sets the current dates day to the first of the month. Not effecting the time.
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static DateTime GetFirstDayOfMonth(this DateTime date)
+        {
+            return date.AddDays(-(date.Day - 1));
+        }
+        /// <summary>
+        /// Sets the current dates day to the first of the month. Effecting the time.
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static DateTime GetFirstDayAndTimeOfMonth(this DateTime date)
+        {
+            return new DateTime(date.Year, date.Month, 1, 0, 0, 0);
         }
 
         //public static int DaysUntil(this DateTime currentDate, DateTime date)
