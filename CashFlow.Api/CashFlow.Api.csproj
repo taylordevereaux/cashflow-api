@@ -6,11 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Models\" />
     <Folder Include="Repository\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dates.Recurring" Version="1.1.24" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>

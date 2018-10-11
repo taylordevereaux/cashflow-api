@@ -7,7 +7,7 @@ namespace CashFlow.Api.Repository
     {
         public Account()
         {
-            RepeatTransaction = new HashSet<RepeatTransaction>();
+            RecurringTransaction = new HashSet<RecurringTransaction>();
         }
 
         public int AccountId { get; set; }
@@ -17,6 +17,6 @@ namespace CashFlow.Api.Repository
         public DateTime CreatedDate { get; set; }
 
         public AccountType AccountType { get; set; }
-        public ICollection<RepeatTransaction> RepeatTransaction { get; set; }
+        public ICollection<RecurringTransaction> RecurringTransaction { get; set; }
     }
 }
