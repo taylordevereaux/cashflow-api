@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using CashFlow.Api.Extensions;
+using CashFlow.Api.Models;
 using CashFlow.Api.Repository;
 using CashFlow.Api.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -21,38 +24,65 @@ namespace CashFlow.Api.Controllers
         }
 
         // GET api/values
-       [HttpGet("/api/[controller]/summary")]
-        public async Task<IActionResult> GetSummary()
+        [HttpGet("/api/[controller]/summary")]
+        public async Task<IActionResult> GetSummary([FromQuery] SummaryOptions options)
         {
-            //var repeatTransactions = await _context
-            //    .RecurringTransaction
-            //    .Select(x => new
-            //    {
-            //        Account = new
-            //        {
-            //            x.Account.Name,
-            //            x.Account.Amount
-            //        },
-            //        x.Amount,
-            //        x.CreatedDate,
-            //        x.StartDate,
-            //        TransactionType = new
-            //        {
-            //            x.TransactionType.TransactionTypeConstant
-            //        },
-            //        RepeatType = new
-            //        {
-            //            x.RepeatType.RepeatTypeConstant
-            //        },
-            //    })
-            //    //.Where(x => x.RepeatTransactionId == id)
-            //    .ToListAsync();
+            var accounts = await _context
+                .Account
+                .Where(x => options.AccountId == null || options.AccountId == x.AccountId)
+                .Include(x => x.RecurringTransaction)
+                .ThenInclude(x => x.Schedule)
+                .Include(x => x.RecurringTransaction)
+                .ThenInclude(x => x.TransactionType)
+                .ToListAsync();
 
-            //var month = DateTime.Now.GetLastDayAndTimeOfMonth();
+            DateTime startDate = options.StartDate ?? DateTime.Now;
 
-            //var months = month.Repeat(RepeatType.Monthly, 12);
+            var schedule = RecurringDateBuilder.Build(new Schedule()
+            {
+                StartDate = startDate,
+                RecurrenceType = options.Recurrence.ToString(),
+                RecurrenceAmount = options.RecurrenceMultiplier,
+                EndDate = DateTime.MaxValue
+            });
 
-            return Ok();
+            var ranges = schedule
+                // Adding one less day to the start date to include it in the list.
+                .Until(startDate, options.RecurrenceCount);
+
+            var amount = accounts.Sum(x => x.Amount);
+
+            var results = new List<(DateTime date, decimal amount)>();
+
+            var transactions = accounts
+                .SelectMany(x => x.RecurringTransaction)
+                .ToList();
+
+            var schedules = transactions
+                .Select(x => new
+                {
+                    x.Amount,
+                    Schedule = RecurringDateBuilder.Build(x.Schedule)
+                })
+                .ToList();
+
+            foreach (var s in schedules)
+            {
+                var temp = s.Schedule.Until(startDate, ranges[0]);
+            }
+
+            foreach (var range in ranges.OrderBy(x => x))
+            {
+                var rangeSum =
+                    schedules.Sum(x => x.Amount * x.Schedule.Until(startDate, range).Count);
+                amount += rangeSum;
+
+                startDate = range;
+
+                results.Add((range, amount));
+            }
+
+            return Ok(results);
         }
 
         // GET api/values

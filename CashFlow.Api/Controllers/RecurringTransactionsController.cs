@@ -24,7 +24,7 @@ namespace CashFlow.Api.Controllers
         [HttpGet]
         public IEnumerable<RecurringTransaction> GetRecurringTransaction()
         {
-            return _context.RecurringTransaction;
+            return _context.RecurringTransaction.Include(x => x.Schedule);
         }
 
         // GET: api/RecurringTransactions/5
@@ -36,7 +36,11 @@ namespace CashFlow.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var recurringTransaction = await _context.RecurringTransaction.FindAsync(id);
+            var recurringTransaction = await _context.RecurringTransaction
+                .Include(x => x.Schedule)
+                .Include(x => x.Account)
+                .Include(x => x.TransactionType)
+                .SingleOrDefaultAsync(x => x.RecurringTransactionId == id);
 
             if (recurringTransaction == null)
             {
