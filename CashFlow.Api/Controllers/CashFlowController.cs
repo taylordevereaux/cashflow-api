@@ -36,8 +36,9 @@ namespace CashFlow.Api.Controllers
                 .ThenInclude(x => x.TransactionType)
                 .ToListAsync();
 
+            // Default the start date to today if not passed in.
             DateTime startDate = options.StartDate ?? DateTime.Now;
-
+            // Define the schedule with the provided options.
             var schedule = RecurringDateBuilder.Build(new Schedule()
             {
                 StartDate = startDate,
@@ -45,11 +46,11 @@ namespace CashFlow.Api.Controllers
                 RecurrenceAmount = options.RecurrenceMultiplier,
                 EndDate = DateTime.MaxValue
             });
-
+            // Determine the amount of dates that will occure given the schedule options provided.
             var ranges = schedule
-                // Adding one less day to the start date to include it in the list.
                 .Until(startDate, options.RecurrenceCount);
 
+            // The total amount of all accounts, we will increment this with each date occurence above.
             var amount = accounts.Sum(x => x.Amount);
 
             var results = new List<(DateTime date, decimal amount)>();

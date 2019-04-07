@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CashFlow.Api.Business;
 using CashFlow.Api.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,6 +40,7 @@ namespace CashFlow.Api
             services.AddDbContext<CashFlowDBContext>(options =>
                 options.UseSqlServer(Configuration["DBConnectionString"]));
             //services.AddScoped<CashFlowDBContext>();
+            services.AddSingleton<AccountService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

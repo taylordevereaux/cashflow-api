@@ -19,6 +19,7 @@ namespace CashFlow.Api.Repository
         public virtual DbSet<AccountType> AccountType { get; set; }
         public virtual DbSet<RecurringTransaction> RecurringTransaction { get; set; }
         public virtual DbSet<Schedule> Schedule { get; set; }
+        public virtual DbSet<Transaction> Transaction { get; set; }
         public virtual DbSet<TransactionType> TransactionType { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -35,6 +36,8 @@ namespace CashFlow.Api.Repository
             {
                 entity.ToTable("Account", "CashFlow");
 
+                entity.Property(e => e.AccountId).HasDefaultValueSql("(newid())");
+
                 entity.Property(e => e.Amount).HasColumnType("decimal(20, 6)");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -44,11 +47,13 @@ namespace CashFlow.Api.Repository
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
+                entity.Property(e => e.StartingAmount).HasColumnType("decimal(20, 6)");
+
                 entity.HasOne(d => d.AccountType)
                     .WithMany(p => p.Account)
                     .HasForeignKey(d => d.AccountTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Account__Account__3F466844");
+                    .HasConstraintName("FK__Account__AccountTypeId");
             });
 
             modelBuilder.Entity<AccountType>(entity =>
@@ -94,18 +99,18 @@ namespace CashFlow.Api.Repository
                     .WithMany(p => p.RecurringTransaction)
                     .HasForeignKey(d => d.AccountId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Recurring__Accou__49C3F6B7");
+                    .HasConstraintName("FK__Recurring__AccountId");
 
                 entity.HasOne(d => d.Schedule)
                     .WithOne(p => p.RecurringTransaction)
                     .HasForeignKey<RecurringTransaction>(d => d.ScheduleId)
-                    .HasConstraintName("FK__Recurring__Sched__4AB81AF0");
+                    .HasConstraintName("FK__Recurring__ScheduleId");
 
                 entity.HasOne(d => d.TransactionType)
                     .WithMany(p => p.RecurringTransaction)
                     .HasForeignKey(d => d.TransactionTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Recurring__Trans__48CFD27E");
+                    .HasConstraintName("FK__Recurring__TransactionTypeId");
             });
 
             modelBuilder.Entity<Schedule>(entity =>
@@ -132,6 +137,27 @@ namespace CashFlow.Api.Repository
                     .IsUnicode(false);
 
                 entity.Property(e => e.StartDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<Transaction>(entity =>
+            {
+                entity.ToTable("Transaction", "CashFlow");
+
+                entity.Property(e => e.Amount).HasColumnType("decimal(20, 6)");
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Account)
+                    .WithMany(p => p.Transaction)
+                    .HasForeignKey(d => d.AccountId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Transaction_AccountId");
+
+                entity.HasOne(d => d.TransactionType)
+                    .WithMany(p => p.Transaction)
+                    .HasForeignKey(d => d.TransactionTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Transaction_TransactionTypeId");
             });
 
             modelBuilder.Entity<TransactionType>(entity =>
