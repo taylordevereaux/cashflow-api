@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CashFlow.Api.Repository;
+using CashFlow.Api.Business;
 
 namespace CashFlow.Api.Controllers
 {
@@ -13,34 +14,37 @@ namespace CashFlow.Api.Controllers
     [ApiController]
     public class RecurringTransactionsController : ControllerBase
     {
-        private readonly CashFlowDBContext _context;
+        private readonly RecurringTransactionsService _service;
 
-        public RecurringTransactionsController(CashFlowDBContext context)
+        public RecurringTransactionsController(RecurringTransactionsService service)
         {
-            _context = context;
+            _service = service;
         }
 
         // GET: api/RecurringTransactions
         [HttpGet]
-        public IEnumerable<RecurringTransaction> GetRecurringTransaction()
+        public async Task<IEnumerable<RecurringTransaction>> GetRecurringTransactions()
         {
-            return _context.RecurringTransaction.Include(x => x.Schedule);
+            return await _service.GetRecurringTransactions();
+        }
+
+        // GET: api/Account/{id}/RecurringTransactions
+        [HttpGet("api/Account/{id}/RecurringTransactions")]
+        public async Task<IEnumerable<RecurringTransaction>> GetRecurringTransactions([FromRoute] Guid id)
+        {
+            return await _service.GetRecurringTransactions(id);
         }
 
         // GET: api/RecurringTransactions/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetRecurringTransaction([FromRoute] int id)
+        public async Task<IActionResult> GetRecurringTransaction([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var recurringTransaction = await _context.RecurringTransaction
-                .Include(x => x.Schedule)
-                .Include(x => x.Account)
-                .Include(x => x.TransactionType)
-                .SingleOrDefaultAsync(x => x.RecurringTransactionId == id);
+            var recurringTransaction = await _service.GetRecurringTransaction(id);
 
             if (recurringTransaction == null)
             {
@@ -52,7 +56,7 @@ namespace CashFlow.Api.Controllers
 
         // PUT: api/RecurringTransactions/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRecurringTransaction([FromRoute] int id, [FromBody] RecurringTransaction recurringTransaction)
+        public async Task<IActionResult> PutRecurringTransaction([FromRoute] Guid id, [FromBody] RecurringTransaction recurringTransaction)
         {
             if (!ModelState.IsValid)
             {
@@ -64,15 +68,13 @@ namespace CashFlow.Api.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(recurringTransaction).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _service.UpdateRecurringTransaction(recurringTransaction);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RecurringTransactionExists(id))
+                if (!_service.RecurringTransactionExists(id))
                 {
                     return NotFound();
                 }
@@ -94,36 +96,29 @@ namespace CashFlow.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.RecurringTransaction.Add(recurringTransaction);
-            await _context.SaveChangesAsync();
+            await _service.CreateRecurringTransaction(recurringTransaction);
 
             return CreatedAtAction("GetRecurringTransaction", new { id = recurringTransaction.RecurringTransactionId }, recurringTransaction);
         }
 
         // DELETE: api/RecurringTransactions/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRecurringTransaction([FromRoute] int id)
+        public async Task<IActionResult> DeleteRecurringTransaction([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var recurringTransaction = await _context.RecurringTransaction.FindAsync(id);
+            var recurringTransaction = await _service.GetRecurringTransaction(id);
             if (recurringTransaction == null)
             {
                 return NotFound();
             }
 
-            _context.RecurringTransaction.Remove(recurringTransaction);
-            await _context.SaveChangesAsync();
+            await _service.DeleteRecurringTransaction(id);
 
             return Ok(recurringTransaction);
-        }
-
-        private bool RecurringTransactionExists(int id)
-        {
-            return _context.RecurringTransaction.Any(e => e.RecurringTransactionId == id);
         }
     }
 }

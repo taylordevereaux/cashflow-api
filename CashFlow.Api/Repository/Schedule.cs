@@ -5,7 +5,7 @@ namespace CashFlow.Api.Repository
 {
     public partial class Schedule
     {
-        public int ScheduleId { get; set; }
+        public Guid ScheduleId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int RecurrenceAmount { get; set; }
@@ -15,6 +15,6 @@ namespace CashFlow.Api.Repository
         public string DayOfWeek { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        public RecurringTransaction RecurringTransaction { get; set; }
+        public virtual RecurringTransaction RecurringTransaction { get; set; }
     }
 }

@@ -15,12 +15,12 @@ namespace CashFlow.Api.Repository
         {
         }
 
-        public virtual DbSet<Account> Account { get; set; }
-        public virtual DbSet<AccountType> AccountType { get; set; }
-        public virtual DbSet<RecurringTransaction> RecurringTransaction { get; set; }
-        public virtual DbSet<Schedule> Schedule { get; set; }
-        public virtual DbSet<Transaction> Transaction { get; set; }
-        public virtual DbSet<TransactionType> TransactionType { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<AccountType> AccountTypes { get; set; }
+        public virtual DbSet<RecurringTransaction> RecurringTransactions { get; set; }
+        public virtual DbSet<Schedule> Schedules { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
+        public virtual DbSet<TransactionType> TransactionTypes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -32,6 +32,8 @@ namespace CashFlow.Api.Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasAnnotation("ProductVersion", "2.2.3-servicing-35854");
+
             modelBuilder.Entity<Account>(entity =>
             {
                 entity.ToTable("Account", "CashFlow");
@@ -50,7 +52,7 @@ namespace CashFlow.Api.Repository
                 entity.Property(e => e.StartingAmount).HasColumnType("decimal(20, 6)");
 
                 entity.HasOne(d => d.AccountType)
-                    .WithMany(p => p.Account)
+                    .WithMany(p => p.Accounts)
                     .HasForeignKey(d => d.AccountTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Account__AccountTypeId");
@@ -61,12 +63,13 @@ namespace CashFlow.Api.Repository
                 entity.ToTable("AccountType", "Lookup");
 
                 entity.HasIndex(e => e.AccountTypeConstant)
-                    .HasName("UQ__AccountT__5760C6A068E0D90D")
+                    .HasName("UQ__AccountT__5760C6A0854808C5")
                     .IsUnique();
+
+                entity.Property(e => e.AccountTypeId).HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.AccountTypeConstant)
                     .IsRequired()
-                    .HasColumnType("Constant")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -86,6 +89,8 @@ namespace CashFlow.Api.Repository
                     .HasName("UNQ_TRANS_SCHED_ID")
                     .IsUnique();
 
+                entity.Property(e => e.RecurringTransactionId).HasDefaultValueSql("(newid())");
+
                 entity.Property(e => e.Amount).HasColumnType("decimal(20, 6)");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -96,7 +101,7 @@ namespace CashFlow.Api.Repository
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Account)
-                    .WithMany(p => p.RecurringTransaction)
+                    .WithMany(p => p.RecurringTransactions)
                     .HasForeignKey(d => d.AccountId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Recurring__AccountId");
@@ -107,7 +112,7 @@ namespace CashFlow.Api.Repository
                     .HasConstraintName("FK__Recurring__ScheduleId");
 
                 entity.HasOne(d => d.TransactionType)
-                    .WithMany(p => p.RecurringTransaction)
+                    .WithMany(p => p.RecurringTransactions)
                     .HasForeignKey(d => d.TransactionTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Recurring__TransactionTypeId");
@@ -116,6 +121,8 @@ namespace CashFlow.Api.Repository
             modelBuilder.Entity<Schedule>(entity =>
             {
                 entity.ToTable("Schedule", "CashFlow");
+
+                entity.Property(e => e.ScheduleId).HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
@@ -143,18 +150,20 @@ namespace CashFlow.Api.Repository
             {
                 entity.ToTable("Transaction", "CashFlow");
 
+                entity.Property(e => e.TransactionId).HasDefaultValueSql("(newid())");
+
                 entity.Property(e => e.Amount).HasColumnType("decimal(20, 6)");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.HasOne(d => d.Account)
-                    .WithMany(p => p.Transaction)
+                    .WithMany(p => p.Transactions)
                     .HasForeignKey(d => d.AccountId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Transaction_AccountId");
 
                 entity.HasOne(d => d.TransactionType)
-                    .WithMany(p => p.Transaction)
+                    .WithMany(p => p.Transactions)
                     .HasForeignKey(d => d.TransactionTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Transaction_TransactionTypeId");
@@ -165,8 +174,10 @@ namespace CashFlow.Api.Repository
                 entity.ToTable("TransactionType", "Lookup");
 
                 entity.HasIndex(e => e.TransactionTypeConstant)
-                    .HasName("UQ__Transact__48A3C705D654D116")
+                    .HasName("UQ__Transact__48A3C7050D216C71")
                     .IsUnique();
+
+                entity.Property(e => e.TransactionTypeId).HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
@@ -177,7 +188,6 @@ namespace CashFlow.Api.Repository
 
                 entity.Property(e => e.TransactionTypeConstant)
                     .IsRequired()
-                    .HasColumnType("Constant")
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });

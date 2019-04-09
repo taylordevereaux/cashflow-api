@@ -40,7 +40,9 @@ namespace CashFlow.Api
             services.AddDbContext<CashFlowDBContext>(options =>
                 options.UseSqlServer(Configuration["DBConnectionString"]));
             //services.AddScoped<CashFlowDBContext>();
-            services.AddSingleton<AccountService>();
+            services.AddScoped<AccountsService>();
+            services.AddScoped<RecurringTransactionsService>();
+            services.AddScoped<LookupsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

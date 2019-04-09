@@ -7,14 +7,14 @@ namespace CashFlow.Api.Repository
     {
         public AccountType()
         {
-            Account = new HashSet<Account>();
+            Accounts = new HashSet<Account>();
         }
 
-        public int AccountTypeId { get; set; }
+        public Guid AccountTypeId { get; set; }
         public string AccountTypeConstant { get; set; }
         public string Name { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        public ICollection<Account> Account { get; set; }
+        public virtual ICollection<Account> Accounts { get; set; }
     }
 }

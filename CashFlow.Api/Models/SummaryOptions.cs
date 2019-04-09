@@ -8,7 +8,7 @@ namespace CashFlow.Api.Models
 {
     public class SummaryOptions
     {
-        public int? AccountId { get; set; }
+        public Guid? AccountId { get; set; }
 
         public DateTime? StartDate { get; set; }
 

@@ -24,15 +24,15 @@ namespace CashFlow.Api.Controllers
         }
 
         // GET api/values
-        [HttpGet("/api/[controller]/summary")]
+        [HttpGet("Summary")]
         public async Task<IActionResult> GetSummary([FromQuery] SummaryOptions options)
         {
             var accounts = await _context
-                .Account
+                .Accounts
                 .Where(x => options.AccountId == null || options.AccountId == x.AccountId)
-                .Include(x => x.RecurringTransaction)
+                .Include(x => x.RecurringTransactions)
                 .ThenInclude(x => x.Schedule)
-                .Include(x => x.RecurringTransaction)
+                .Include(x => x.RecurringTransactions)
                 .ThenInclude(x => x.TransactionType)
                 .ToListAsync();
 
@@ -56,7 +56,7 @@ namespace CashFlow.Api.Controllers
             var results = new List<(DateTime date, decimal amount)>();
 
             var transactions = accounts
-                .SelectMany(x => x.RecurringTransaction)
+                .SelectMany(x => x.RecurringTransactions)
                 .ToList();
 
             var schedules = transactions
@@ -87,65 +87,65 @@ namespace CashFlow.Api.Controllers
         }
 
         // GET api/values
-        [HttpGet("/api/[controller]/summary/{id}")]
-        public async Task<IActionResult> GetTransactionSummary(int id)
-        {
-            //var repeatTransaction = await _context
-            //    .RecurringTransaction
-            //    .Include(x => x.RepeatType)
-            //    .Include(x => x.TransactionType)
-            //    .Where(x => x.RepeatTransactionId == id)
-            //    .SingleOrDefaultAsync();
+        //[HttpGet("/Summary/{id}")]
+        //public async Task<IActionResult> GetTransactionSummary(int id)
+        //{
+        //    //var repeatTransaction = await _context
+        //    //    .RecurringTransaction
+        //    //    .Include(x => x.RepeatType)
+        //    //    .Include(x => x.TransactionType)
+        //    //    .Where(x => x.RepeatTransactionId == id)
+        //    //    .SingleOrDefaultAsync();
 
-            //var transactions = RepeatTransactionManager.RepeatTransaction(repeatTransaction, 12).ToList();
+        //    //var transactions = RepeatTransactionManager.RepeatTransaction(repeatTransaction, 12).ToList();
 
-            //var summary = new
-            //{
-            //    Sum = transactions.Sum(x => x.Amount) *
-            //          (repeatTransaction.TransactionType.TransactionTypeConstant == "EXPENSE" ? -1 : 1),
-            //    Date = transactions.Max(x => x.TransactionDate)
-            //};
+        //    //var summary = new
+        //    //{
+        //    //    Sum = transactions.Sum(x => x.Amount) *
+        //    //          (repeatTransaction.TransactionType.TransactionTypeConstant == "EXPENSE" ? -1 : 1),
+        //    //    Date = transactions.Max(x => x.TransactionDate)
+        //    //};
 
-            //return Ok(new
-            //{
-            //    RepeatTransaction = repeatTransaction,
-            //    Summary = summary,
-            //    Transactions = transactions,
-            //});
-            return null;
-        }
+        //    //return Ok(new
+        //    //{
+        //    //    RepeatTransaction = repeatTransaction,
+        //    //    Summary = summary,
+        //    //    Transactions = transactions,
+        //    //});
+        //    return null;
+        //}
         // GET api/values/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
-        {
-            //var repeatTransaction = await _context
-            //    .RepeatTransaction
-            //    .Select(x => new
-            //    {
-            //        x.RepeatTransactionId,
-            //        Account = new
-            //        {
-            //            x.Account.Name,
-            //            x.Account.AccountId
-            //        },
-            //        x.Amount,
-            //        x.CreatedDate,
-            //        x.StartDate,
-            //        TransactionType = new
-            //        {
-            //            x.TransactionType.TransactionTypeConstant,
-            //            x.TransactionType.Name
-            //        },
-            //        RepeatType = new
-            //        {
-            //            x.RepeatType.RepeatTypeConstant,
-            //            x.RepeatType.Name
-            //        },
-            //    })
-            //    .Where(x => x.RepeatTransactionId == id)
-            //    .SingleOrDefaultAsync();
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> Get(int id)
+        //{
+        //    //var repeatTransaction = await _context
+        //    //    .RepeatTransaction
+        //    //    .Select(x => new
+        //    //    {
+        //    //        x.RepeatTransactionId,
+        //    //        Account = new
+        //    //        {
+        //    //            x.Account.Name,
+        //    //            x.Account.AccountId
+        //    //        },
+        //    //        x.Amount,
+        //    //        x.CreatedDate,
+        //    //        x.StartDate,
+        //    //        TransactionType = new
+        //    //        {
+        //    //            x.TransactionType.TransactionTypeConstant,
+        //    //            x.TransactionType.Name
+        //    //        },
+        //    //        RepeatType = new
+        //    //        {
+        //    //            x.RepeatType.RepeatTypeConstant,
+        //    //            x.RepeatType.Name
+        //    //        },
+        //    //    })
+        //    //    .Where(x => x.RepeatTransactionId == id)
+        //    //    .SingleOrDefaultAsync();
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
     }
 }
