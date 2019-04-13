@@ -25,7 +25,7 @@ namespace CashFlow.Api.Controllers
 
         // GET api/values
         [HttpGet("Summary")]
-        public async Task<IActionResult> GetSummary([FromQuery] SummaryOptions options)
+        public async Task<IActionResult> GetSummary([FromBody] SummaryOptions options)
         {
             var accounts = await _context
                 .Accounts

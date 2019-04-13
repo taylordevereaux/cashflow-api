@@ -111,11 +111,11 @@ namespace CashFlow.Api.Repository
                     .HasForeignKey<RecurringTransaction>(d => d.ScheduleId)
                     .HasConstraintName("FK__Recurring__ScheduleId");
 
-                entity.HasOne(d => d.TransactionType)
-                    .WithMany(p => p.RecurringTransactions)
-                    .HasForeignKey(d => d.TransactionTypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Recurring__TransactionTypeId");
+                entity.HasOne(d => d.TransactionType);
+                    //.WithMany(p => p.RecurringTransactions)
+                    //.HasForeignKey(d => d.TransactionTypeId)
+                    //.OnDelete(DeleteBehavior.ClientSetNull)
+                    //.HasConstraintName("FK__Recurring__TransactionTypeId");
             });
 
             modelBuilder.Entity<Schedule>(entity =>
@@ -162,11 +162,11 @@ namespace CashFlow.Api.Repository
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Transaction_AccountId");
 
-                entity.HasOne(d => d.TransactionType)
-                    .WithMany(p => p.Transactions)
-                    .HasForeignKey(d => d.TransactionTypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Transaction_TransactionTypeId");
+                entity.HasOne(d => d.TransactionType);
+                    //.WithMany(p => p.Transactions)
+                    //.HasForeignKey(d => d.TransactionTypeId)
+                    //.OnDelete(DeleteBehavior.ClientSetNull)
+                    //.HasConstraintName("FK__Transaction_TransactionTypeId");
             });
 
             modelBuilder.Entity<TransactionType>(entity =>

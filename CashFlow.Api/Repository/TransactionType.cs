@@ -7,8 +7,8 @@ namespace CashFlow.Api.Repository
     {
         public TransactionType()
         {
-            RecurringTransactions = new HashSet<RecurringTransaction>();
-            Transactions = new HashSet<Transaction>();
+            //RecurringTransactions = new HashSet<RecurringTransaction>();
+            //Transactions = new HashSet<Transaction>();
         }
 
         public Guid TransactionTypeId { get; set; }
@@ -16,7 +16,7 @@ namespace CashFlow.Api.Repository
         public string Name { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        public virtual ICollection<RecurringTransaction> RecurringTransactions { get; set; }
-        public virtual ICollection<Transaction> Transactions { get; set; }
+        //public virtual ICollection<RecurringTransaction> RecurringTransactions { get; set; }
+        //public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

@@ -41,6 +41,7 @@ namespace CashFlow.Api.Business
         {
             return await _context
                 .Accounts
+                .Include(x => x.AccountType)
                 .ToListAsync();
         }
 
