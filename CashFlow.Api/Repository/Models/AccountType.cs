@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CashFlow.Api.Repository
+namespace CashFlow.Api.Repository.Models
 {
     public partial class AccountType
     {

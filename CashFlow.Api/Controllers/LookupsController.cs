@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CashFlow.Api.Business;
 using CashFlow.Api.Repository;
+using CashFlow.Api.Repository.Models;
 
 namespace CashFlow.Api.Controllers
 {

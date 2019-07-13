@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using CashFlow.Api.Repository;
+using CashFlow.Api.Repository.Models;
 using Dates.Recurring;
 using Dates.Recurring.Type;
 

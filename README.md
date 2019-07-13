@@ -1,4 +1,4 @@
-# Cash Flow Calculator API
+# Cash Flow Calculator
 Calculate how much money you spend monthly on recurring bills, subscriptions and more...
 
 ## Overview

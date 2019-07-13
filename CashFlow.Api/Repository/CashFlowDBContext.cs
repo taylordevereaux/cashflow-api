@@ -1,19 +1,25 @@
 ﻿using System;
+using CashFlow.Api.Repository.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CashFlow.Api.Repository
 {
-    public partial class CashFlowDBContext : DbContext
+    public partial class CashFlowDbContext : IdentityDbContext<
+            User,
+            Role,
+            Guid,
+            IdentityUserClaim<Guid>,
+            UserRole,
+            IdentityUserLogin<Guid>,
+            IdentityRoleClaim<Guid>,
+            IdentityUserToken<Guid>>
     {
-        public CashFlowDBContext()
-        {
-        }
-
-        public CashFlowDBContext(DbContextOptions<CashFlowDBContext> options)
+        public CashFlowDbContext(DbContextOptions<CashFlowDbContext> options)
             : base(options)
-        {
-        }
+        {}
 
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<AccountType> AccountTypes { get; set; }
@@ -24,15 +30,25 @@ namespace CashFlow.Api.Repository
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("name=DBConnectionString");
-            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("ProductVersion", "2.2.3-servicing-35854");
+            
+            modelBuilder.Entity<UserRole>(userRole =>
+            {
+                userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
+
+                userRole.HasOne(ur => ur.Role)
+                    .WithMany(r => r.UserRoles)
+                    .HasForeignKey(ur => ur.RoleId)
+                    .IsRequired();
+
+                userRole.HasOne(ur => ur.User)
+                    .WithMany(r => r.UserRoles)
+                    .HasForeignKey(ur => ur.UserId)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity<Account>(entity =>
             {
@@ -46,16 +62,14 @@ namespace CashFlow.Api.Repository
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.StartingAmount).HasColumnType("decimal(20, 6)");
 
                 entity.HasOne(d => d.AccountType)
                     .WithMany(p => p.Accounts)
                     .HasForeignKey(d => d.AccountTypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Account__AccountTypeId");
+                    .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<AccountType>(entity =>
@@ -63,7 +77,6 @@ namespace CashFlow.Api.Repository
                 entity.ToTable("AccountType", "Lookup");
 
                 entity.HasIndex(e => e.AccountTypeConstant)
-                    .HasName("UQ__AccountT__5760C6A0854808C5")
                     .IsUnique();
 
                 entity.Property(e => e.AccountTypeId).HasDefaultValueSql("(newid())");
@@ -86,7 +99,6 @@ namespace CashFlow.Api.Repository
                 entity.ToTable("RecurringTransaction", "CashFlow");
 
                 entity.HasIndex(e => e.ScheduleId)
-                    .HasName("UNQ_TRANS_SCHED_ID")
                     .IsUnique();
 
                 entity.Property(e => e.RecurringTransactionId).HasDefaultValueSql("(newid())");
@@ -103,19 +115,13 @@ namespace CashFlow.Api.Repository
                 entity.HasOne(d => d.Account)
                     .WithMany(p => p.RecurringTransactions)
                     .HasForeignKey(d => d.AccountId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Recurring__AccountId");
+                    .OnDelete(DeleteBehavior.ClientSetNull);
 
                 entity.HasOne(d => d.Schedule)
                     .WithOne(p => p.RecurringTransaction)
-                    .HasForeignKey<RecurringTransaction>(d => d.ScheduleId)
-                    .HasConstraintName("FK__Recurring__ScheduleId");
+                    .HasForeignKey<RecurringTransaction>(d => d.ScheduleId);
 
                 entity.HasOne(d => d.TransactionType);
-                    //.WithMany(p => p.RecurringTransactions)
-                    //.HasForeignKey(d => d.TransactionTypeId)
-                    //.OnDelete(DeleteBehavior.ClientSetNull)
-                    //.HasConstraintName("FK__Recurring__TransactionTypeId");
             });
 
             modelBuilder.Entity<Schedule>(entity =>
@@ -159,14 +165,9 @@ namespace CashFlow.Api.Repository
                 entity.HasOne(d => d.Account)
                     .WithMany(p => p.Transactions)
                     .HasForeignKey(d => d.AccountId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Transaction_AccountId");
+                    .OnDelete(DeleteBehavior.ClientSetNull);
 
                 entity.HasOne(d => d.TransactionType);
-                    //.WithMany(p => p.Transactions)
-                    //.HasForeignKey(d => d.TransactionTypeId)
-                    //.OnDelete(DeleteBehavior.ClientSetNull)
-                    //.HasConstraintName("FK__Transaction_TransactionTypeId");
             });
 
             modelBuilder.Entity<TransactionType>(entity =>
@@ -174,7 +175,6 @@ namespace CashFlow.Api.Repository
                 entity.ToTable("TransactionType", "Lookup");
 
                 entity.HasIndex(e => e.TransactionTypeConstant)
-                    .HasName("UQ__Transact__48A3C7050D216C71")
                     .IsUnique();
 
                 entity.Property(e => e.TransactionTypeId).HasDefaultValueSql("(newid())");

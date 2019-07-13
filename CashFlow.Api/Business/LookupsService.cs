@@ -1,4 +1,5 @@
 ﻿using CashFlow.Api.Repository;
+using CashFlow.Api.Repository.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,9 @@ namespace CashFlow.Api.Business
     /// </summary>
     public class LookupsService
     {
-        private readonly CashFlowDBContext _context;
+        private readonly CashFlowDbContext _context;
 
-        public LookupsService(CashFlowDBContext context)
+        public LookupsService(CashFlowDbContext context)
         {
             _context = context;
         }

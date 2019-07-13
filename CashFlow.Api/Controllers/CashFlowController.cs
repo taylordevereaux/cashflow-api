@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CashFlow.Api.Extensions;
 using CashFlow.Api.Models;
 using CashFlow.Api.Repository;
+using CashFlow.Api.Repository.Models;
 using CashFlow.Api.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,9 +17,9 @@ namespace CashFlow.Api.Controllers
     [ApiController]
     public class CashFlowController : ControllerBase
     {
-        private readonly CashFlowDBContext _context;
+        private readonly CashFlowDbContext _context;
 
-        public CashFlowController(CashFlowDBContext context)
+        public CashFlowController(CashFlowDbContext context)
         {
             _context = context;
         }
