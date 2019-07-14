@@ -101,7 +101,6 @@ namespace CashFlow.Api
             });
             
             services.AddHttpContextAccessor();
-
             
             services.AddSpaStaticFiles(configuration =>
             {
@@ -127,7 +126,6 @@ namespace CashFlow.Api
                 });
             }
 
-            app.UseHttpsRedirection();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
