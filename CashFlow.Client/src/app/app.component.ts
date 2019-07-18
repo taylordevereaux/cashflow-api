@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
 
-import 'styles/bootstrap.scss';
-import 'styles/material-theme.scss';
-import 'styles/cashflow-dark-theme.scss';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,4 +7,7 @@ import 'styles/cashflow-dark-theme.scss';
 })
 export class AppComponent {
   title = 'app';
+  constructor() {
+    console.log('App constructor hit!!!');
+  }
 }

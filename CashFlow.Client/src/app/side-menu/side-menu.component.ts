@@ -8,5 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class SideMenuComponent implements OnInit {
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const test = 'title';
+  }
 }
