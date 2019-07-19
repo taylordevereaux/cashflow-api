@@ -60,7 +60,7 @@ namespace CashFlow.Api.Utils
                 .Every(schedule.RecurrenceAmount)
                 .Months();
 
-            
+
             if (schedule.Ordinal != null && schedule.DayOfWeek != null)
             {
                 return month

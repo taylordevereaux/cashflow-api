@@ -1,0 +1,28 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#72c8a0",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#935ec0",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "titleBar.activeBackground": "#4dba87",
+    "titleBar.inactiveBackground": "#4dba8799",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveForeground": "#15202b99",
+    "statusBar.background": "#4dba87",
+    "statusBarItem.hoverBackground": "#3b996d",
+    "statusBar.foreground": "#15202b"
+  },
+  "tslint.configFile": "../ClientApp/tslint.json",
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnSave": true,
+  "editor.insertSpaces": true,
+  "prettier.singleQuote": true,
+  "prettier.useTabs": false,
+  "prettier.tabWidth": 2,
+  "prettier.bracketSpacing": true
+}

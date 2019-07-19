@@ -12,7 +12,7 @@ namespace CashFlow.Api.Tests
             var compare = new DateTime(2018, 10, 10);
 
             Assert.True(compare == date.Repeat(RepeatType.Daily, 25)
-                        ,"Repeat Daily should only add x number of days.");
+                        , "Repeat Daily should only add x number of days.");
         }
         [Fact]
         public void Repeat_Weekly()

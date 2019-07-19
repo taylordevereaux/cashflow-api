@@ -1,0 +1,51 @@
+{
+  // Use IntelliSense to find out which attributes exist for C# debugging
+  // Use hover for the description of the existing attributes
+  // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": ".NET Core",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      // If you have changed target frameworks, make sure to update the program path.
+      "program": "${workspaceFolder}/CashFlow.Api/bin/Debug/netcoreapp2.2/CashFlow.Api.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "requireExactSource": false,
+      "internalConsoleOptions": "openOnSessionStart",
+      "launchBrowser": {
+        "enabled": false
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/Views"
+      }
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Chrome",
+      "url": "http://localhost:5000/",
+      "webRoot": "${workspaceFolder}/CashFlow.Client",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack:/*": "${webRoot}/*",
+        "/./*": "${webRoot}/*",
+        "/src/*": "${webRoot}/*",
+        "/*": "*",
+        "/./~/*": "${webRoot}/node_modules/*"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug",
+      "configurations": [".NET Core", "Chrome"]
+    }
+  ]
+}
