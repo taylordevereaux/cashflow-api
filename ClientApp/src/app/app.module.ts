@@ -19,9 +19,8 @@ import { ThemeComponentsModule } from './theme-components/theme-components.modul
     BrowserAnimationsModule,
     ThemeComponentsModule,
     RouterModule.forRoot([
-      { path: '', component: DashboardComponent, pathMatch: 'full' }
-      // { path: 'counter', component: CounterComponent },
-      // { path: 'fetch-data', component: FetchDataComponent }
+      { path: '', component: DashboardComponent, pathMatch: 'full' },
+      { path: 'counter', component: DashboardComponent }
     ])
   ],
   providers: [],

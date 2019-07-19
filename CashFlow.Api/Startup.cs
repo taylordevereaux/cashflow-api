@@ -58,21 +58,21 @@ namespace CashFlow.Api
 
       services.Configure<IdentityOptions>(options =>
       {
-              // Password settings
-              options.Password.RequireDigit = true;
+        // Password settings
+        options.Password.RequireDigit = true;
         options.Password.RequiredLength = 8;
         options.Password.RequireNonAlphanumeric = true;
         options.Password.RequireUppercase = true;
         options.Password.RequireLowercase = true;
         options.Password.RequiredUniqueChars = 6;
 
-              // Lockout settings
-              options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+        // Lockout settings
+        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
         options.Lockout.MaxFailedAccessAttempts = 10;
         options.Lockout.AllowedForNewUsers = true;
 
-              // User settings
-              options.User.RequireUniqueEmail = true;
+        // User settings
+        options.User.RequireUniqueEmail = true;
       });
 
       services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -104,7 +104,7 @@ namespace CashFlow.Api
 
       services.AddSpaStaticFiles(configuration =>
       {
-        configuration.RootPath = "../CashFlow.Client/dist";
+        configuration.RootPath = "../ClientApp/dist/CashFlow";
       });
     }
 
@@ -135,9 +135,9 @@ namespace CashFlow.Api
 
       app.UseSpa(spa =>
       {
-              // To learn more about options for serving an Angular SPA from ASP.NET Core,
-              // see https://go.microsoft.com/fwlink/?linkid=864501
-              spa.Options.SourcePath = "../CashFlow.Client";
+        // To learn more about options for serving an Angular SPA from ASP.NET Core,
+        // see https://go.microsoft.com/fwlink/?linkid=864501
+        spa.Options.SourcePath = "../ClientApp";
 
         if (env.IsDevelopment())
         {
