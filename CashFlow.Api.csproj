@@ -5,7 +5,7 @@
     <UserSecretsId>7b12ba92-ae69-41f8-bf58-e4aa11f07690</UserSecretsId>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
-    <SpaRoot>..\CashFlow.Client\</SpaRoot>
+    <SpaRoot>ClientApp\</SpaRoot>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**;Tests\**</DefaultItemExcludes>
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
     <IsPackable>false</IsPackable>

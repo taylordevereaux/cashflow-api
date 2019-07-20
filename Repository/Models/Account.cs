@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CashFlow.Api.Repository.Models
 {
@@ -18,6 +19,7 @@ namespace CashFlow.Api.Repository.Models
         public decimal StartingAmount { get; set; }
         public DateTime CreatedDate { get; set; }
 
+        [ForeignKey(nameof(Account.AccountTypeId))]
         public virtual AccountType AccountType { get; set; }
         public virtual ICollection<RecurringTransaction> RecurringTransactions { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }

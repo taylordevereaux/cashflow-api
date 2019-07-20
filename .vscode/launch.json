@@ -10,7 +10,7 @@
       "request": "launch",
       "preLaunchTask": "build",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/CashFlow.Api/bin/Debug/netcoreapp2.2/CashFlow.Api.dll",
+      "program": "${workspaceFolder}/bin/Debug/netcoreapp2.2/CashFlow.Api.dll",
       "args": [],
       "cwd": "${workspaceFolder}",
       "stopAtEntry": false,
@@ -31,7 +31,7 @@
       "request": "launch",
       "name": "Chrome",
       "url": "http://localhost:5000/",
-      "webRoot": "${workspaceFolder}/CashFlow.Client",
+      "webRoot": "${workspaceFolder}/ClientApp",
       "sourceMaps": true,
       "sourceMapPathOverrides": {
         "webpack:/*": "${webRoot}/*",

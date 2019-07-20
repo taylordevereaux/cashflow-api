@@ -5,18 +5,7 @@
       "label": "build",
       "command": "dotnet",
       "type": "process",
-      "args": ["build", "${workspaceFolder}/CashFlow.Api/CashFlow.Api.csproj"],
-      "problemMatcher": "$tsc"
-    },
-    {
-      "label": "run",
-      "command": "dotnet",
-      "type": "process",
-      "args": [
-        "run",
-        "--project",
-        "${workspaceFolder}/CashFlow.Api/CashFlow.Api.csproj"
-      ],
+      "args": ["build", "${workspaceFolder}/CashFlow.Api.csproj"],
       "problemMatcher": "$tsc"
     },
     {

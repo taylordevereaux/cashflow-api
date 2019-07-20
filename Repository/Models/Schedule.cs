@@ -14,7 +14,6 @@ namespace CashFlow.Api.Repository.Models
         public string Ordinal { get; set; }
         public string DayOfWeek { get; set; }
         public DateTime CreatedDate { get; set; }
-
         public virtual RecurringTransaction RecurringTransaction { get; set; }
     }
 }

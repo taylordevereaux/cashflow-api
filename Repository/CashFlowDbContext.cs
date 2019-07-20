@@ -19,7 +19,7 @@ namespace CashFlow.Api.Repository
     {
         public CashFlowDbContext(DbContextOptions<CashFlowDbContext> options)
             : base(options)
-        {}
+        { }
 
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<AccountType> AccountTypes { get; set; }
@@ -34,7 +34,9 @@ namespace CashFlow.Api.Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<UserRole>(userRole =>
             {
                 userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
@@ -58,7 +60,9 @@ namespace CashFlow.Api.Repository
 
                 entity.Property(e => e.Amount).HasColumnType("decimal(20, 6)");
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(GetDate())");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -67,7 +71,7 @@ namespace CashFlow.Api.Repository
                 entity.Property(e => e.StartingAmount).HasColumnType("decimal(20, 6)");
 
                 entity.HasOne(d => d.AccountType)
-                    .WithMany(p => p.Accounts)
+                    .WithMany()
                     .HasForeignKey(d => d.AccountTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
@@ -86,12 +90,35 @@ namespace CashFlow.Api.Repository
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(GetDate())");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
+
+                entity.HasData(
+                    new AccountType()
+                    {
+                        AccountTypeId = Guid.Parse("B86863A3-DB66-46E7-87AF-BF2A49D66FF9"),
+                        AccountTypeConstant = "CREDIT",
+                        Name = "Credit"
+                    },
+                    new AccountType()
+                    {
+                        AccountTypeId = Guid.Parse("2920127B-999C-455E-8536-E65CEAB8552C"),
+                        AccountTypeConstant = "CHEQUING",
+                        Name = "Chequing"
+                    },
+                    new AccountType()
+                    {
+                        AccountTypeId = Guid.Parse("C83C4B41-21D2-461A-A85F-F930F65BA561"),
+                        AccountTypeConstant = "SAVINGS",
+                        Name = "Savings"
+                    }
+                );
             });
 
             modelBuilder.Entity<RecurringTransaction>(entity =>
@@ -105,7 +132,9 @@ namespace CashFlow.Api.Repository
 
                 entity.Property(e => e.Amount).HasColumnType("decimal(20, 6)");
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(GetDate())");
 
                 entity.Property(e => e.Description)
                     .IsRequired()
@@ -130,7 +159,9 @@ namespace CashFlow.Api.Repository
 
                 entity.Property(e => e.ScheduleId).HasDefaultValueSql("(newid())");
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(GetDate())");
 
                 entity.Property(e => e.DayOfWeek)
                     .HasMaxLength(9)
@@ -160,7 +191,9 @@ namespace CashFlow.Api.Repository
 
                 entity.Property(e => e.Amount).HasColumnType("decimal(20, 6)");
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(GetDate())");
 
                 entity.HasOne(d => d.Account)
                     .WithMany(p => p.Transactions)
@@ -179,7 +212,9 @@ namespace CashFlow.Api.Repository
 
                 entity.Property(e => e.TransactionTypeId).HasDefaultValueSql("(newid())");
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(GetDate())");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -190,6 +225,21 @@ namespace CashFlow.Api.Repository
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.HasData(
+                    new TransactionType()
+                    {
+                        TransactionTypeId = Guid.Parse("B47DEACE-4C2E-4F43-9125-8F78409ED8C2"),
+                        TransactionTypeConstant = "INCOME",
+                        Name = "Income"
+                    },
+                    new TransactionType()
+                    {
+                        TransactionTypeId = Guid.Parse("12A56DF0-D4DE-4462-885E-BCCE46DDA838"),
+                        TransactionTypeConstant = "EXPENSE",
+                        Name = "Expense"
+                    }
+                );
             });
         }
     }

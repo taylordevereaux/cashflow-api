@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CashFlow.Api.Repository.Models
 {
@@ -13,8 +14,11 @@ namespace CashFlow.Api.Repository.Models
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
 
+        [ForeignKey(nameof(RecurringTransaction.AccountId))]
         public virtual Account Account { get; set; }
+        [ForeignKey(nameof(RecurringTransaction.ScheduleId))]
         public virtual Schedule Schedule { get; set; }
+        [ForeignKey(nameof(RecurringTransaction.TransactionTypeId))]
         public virtual TransactionType TransactionType { get; set; }
     }
 }

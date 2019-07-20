@@ -104,7 +104,7 @@ namespace CashFlow.Api
 
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "../CashFlow.Client/dist/CashFlow";
+                configuration.RootPath = "ClientApp/dist/CashFlow";
             });
         }
 
@@ -137,7 +137,7 @@ namespace CashFlow.Api
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
                 // see https://go.microsoft.com/fwlink/?linkid=864501
-                spa.Options.SourcePath = "../CashFlow.Client";
+                spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
                 {
