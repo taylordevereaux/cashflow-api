@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CashFlow.Api.Repository.Models
@@ -12,6 +13,7 @@ namespace CashFlow.Api.Repository.Models
             Transactions = new HashSet<Transaction>();
         }
 
+        [Key]
         public Guid AccountId { get; set; }
         public Guid AccountTypeId { get; set; }
         public string Name { get; set; }

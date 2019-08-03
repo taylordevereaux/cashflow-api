@@ -1,5 +1,7 @@
 ﻿using System;
 using CashFlow.Api.Repository.Models;
+using CashFlow.Repository.Models.Budget;
+using CashFlow.Repository.Models.UBudget;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +19,9 @@ namespace CashFlow.Api.Repository
             IdentityRoleClaim<Guid>,
             IdentityUserToken<Guid>>
     {
+        const string AmountColumnType = "decimal(20, 6)";
+        const string PercentageColumnType = "decimal(5, 4)";
+
         public CashFlowDbContext(DbContextOptions<CashFlowDbContext> options)
             : base(options)
         { }
@@ -27,6 +32,12 @@ namespace CashFlow.Api.Repository
         public virtual DbSet<Schedule> Schedules { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<TransactionType> TransactionTypes { get; set; }
+
+        // Budgets
+        public virtual DbSet<Bucket> Buckets { get; set; }
+        public virtual DbSet<UserBucket> UserBuckets { get; set; }
+        public virtual DbSet<LineItem> LineItems { get; set; }
+        // End Budgets
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -58,7 +69,7 @@ namespace CashFlow.Api.Repository
 
                 entity.Property(e => e.AccountId).HasDefaultValueSql("(newid())");
 
-                entity.Property(e => e.Amount).HasColumnType("decimal(20, 6)");
+                entity.Property(e => e.Amount).HasColumnType(AmountColumnType);
 
                 entity.Property(e => e.CreatedDate)
                     .HasColumnType("datetime")
@@ -68,7 +79,7 @@ namespace CashFlow.Api.Repository
                     .IsRequired()
                     .HasMaxLength(100);
 
-                entity.Property(e => e.StartingAmount).HasColumnType("decimal(20, 6)");
+                entity.Property(e => e.StartingAmount).HasColumnType(AmountColumnType);
 
                 entity.HasOne(d => d.AccountType)
                     .WithMany()
@@ -130,7 +141,7 @@ namespace CashFlow.Api.Repository
 
                 entity.Property(e => e.RecurringTransactionId).HasDefaultValueSql("(newid())");
 
-                entity.Property(e => e.Amount).HasColumnType("decimal(20, 6)");
+                entity.Property(e => e.Amount).HasColumnType(AmountColumnType);
 
                 entity.Property(e => e.CreatedDate)
                     .HasColumnType("datetime")
@@ -189,7 +200,7 @@ namespace CashFlow.Api.Repository
 
                 entity.Property(e => e.TransactionId).HasDefaultValueSql("(newid())");
 
-                entity.Property(e => e.Amount).HasColumnType("decimal(20, 6)");
+                entity.Property(e => e.Amount).HasColumnType(AmountColumnType);
 
                 entity.Property(e => e.CreatedDate)
                     .HasColumnType("datetime")
@@ -240,6 +251,89 @@ namespace CashFlow.Api.Repository
                         Name = "Expense"
                     }
                 );
+            });
+
+            modelBuilder.Entity<Bucket>(entity =>
+            {
+                entity.ToTable("Bucket", "Lookup");
+
+                entity.HasIndex(e => e.BucketConstant)
+                    .IsUnique();
+
+                entity.Property(e => e.BucketId).HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.Percentage).HasColumnType(PercentageColumnType);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(GetDate())");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BucketConstant)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasData(
+                    new Bucket()
+                    {
+                        BucketId = Guid.Parse("7DACD09D-EA60-47E3-A256-44D6648EC31A"),
+                        BucketConstant = "FIXED",
+                        Name = "Fixed"
+                    },
+                    new Bucket()
+                    {
+                        BucketId = Guid.Parse("4C6D99B8-3AF2-4DC6-8976-353EC9940275"),
+                        BucketConstant = "INVESTMENTS",
+                        Name = "Investments"
+                    },
+                    new Bucket()
+                    {
+                        BucketId = Guid.Parse("8CDAF6B9-6F66-4699-B689-C88BA1DED997"),
+                        BucketConstant = "SAVINGS",
+                        Name = "Savings"
+                    },
+                    new Bucket()
+                    {
+                        BucketId = Guid.Parse("71AEE0F2-B303-44DF-8B48-5D9B8A33CA52"),
+                        BucketConstant = "GUILTFREE",
+                        Name = "Guilt Free Spending"
+                    }
+                );
+            });
+
+            modelBuilder.Entity<UserBucket>(entity =>
+            {
+                entity.ToTable("UserBucket", "UBudget");
+
+                entity.Property(e => e.BucketId)
+                    .HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.Percentage)
+                    .HasColumnType(PercentageColumnType);
+
+                entity.HasOne(x => x.Bucket)
+                    .WithMany();
+
+                entity.HasOne(typeof(User), nameof(UserBucket.UserId));
+            });
+
+            modelBuilder.Entity<LineItem>(entity =>
+            {
+                entity.ToTable("LineItem", "UBudget");
+
+                entity.Property(e => e.LineItemId)
+                    .HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.FixedAmount)
+                    .HasColumnType(AmountColumnType);
+
+                entity.HasOne(typeof(User), nameof(UserBucket.UserId));
+
             });
         }
     }
