@@ -255,7 +255,7 @@ namespace CashFlow.Api.Repository
 
             modelBuilder.Entity<Bucket>(entity =>
             {
-                entity.ToTable("Bucket", "Lookup");
+                entity.ToTable("Bucket", "Budget");
 
                 entity.HasIndex(e => e.BucketConstant)
                     .IsUnique();
@@ -282,26 +282,34 @@ namespace CashFlow.Api.Repository
                     new Bucket()
                     {
                         BucketId = Guid.Parse("7DACD09D-EA60-47E3-A256-44D6648EC31A"),
-                        BucketConstant = "FIXED",
-                        Name = "Fixed"
+                        BucketConstant = "FIXEDCOSTS",
+                        Name = "Fixed Costs",
+                        Description = "(cell phone, rent, utilities)",
+                        Percentage = 0.60m
                     },
                     new Bucket()
                     {
                         BucketId = Guid.Parse("4C6D99B8-3AF2-4DC6-8976-353EC9940275"),
                         BucketConstant = "INVESTMENTS",
-                        Name = "Investments"
+                        Name = "Investments",
+                        Description = "(RRSP, 401k, Tax-Free Savings, Roth IRA)",
+                        Percentage = 0.05m
                     },
                     new Bucket()
                     {
                         BucketId = Guid.Parse("8CDAF6B9-6F66-4699-B689-C88BA1DED997"),
                         BucketConstant = "SAVINGS",
-                        Name = "Savings"
+                        Name = "Savings",
+                        Description = "(wedding, vacation, house down payment)",
+                        Percentage = 0.1m
                     },
                     new Bucket()
                     {
                         BucketId = Guid.Parse("71AEE0F2-B303-44DF-8B48-5D9B8A33CA52"),
                         BucketConstant = "GUILTFREE",
-                        Name = "Guilt Free Spending"
+                        Name = "Guilt Free Spending",
+                        Description = "(restaurants, bars, movies)",
+                        Percentage = 0.25m
                     }
                 );
             });
@@ -310,7 +318,7 @@ namespace CashFlow.Api.Repository
             {
                 entity.ToTable("UserBucket", "UBudget");
 
-                entity.Property(e => e.BucketId)
+                entity.Property(e => e.UserBucketId)
                     .HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.Percentage)
@@ -319,7 +327,10 @@ namespace CashFlow.Api.Repository
                 entity.HasOne(x => x.Bucket)
                     .WithMany();
 
-                entity.HasOne(typeof(User), nameof(UserBucket.UserId));
+                entity.HasOne<User>()
+                    .WithMany()
+                    .HasForeignKey(x => x.UserId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<LineItem>(entity =>
@@ -332,7 +343,10 @@ namespace CashFlow.Api.Repository
                 entity.Property(e => e.FixedAmount)
                     .HasColumnType(AmountColumnType);
 
-                entity.HasOne(typeof(User), nameof(UserBucket.UserId));
+                entity.HasOne<User>()
+                    .WithMany()
+                    .HasForeignKey(x => x.UserId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
             });
         }

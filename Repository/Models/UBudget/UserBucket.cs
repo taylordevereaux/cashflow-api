@@ -10,7 +10,7 @@ namespace CashFlow.Repository.Models.UBudget
     {
         [Key]
         public Guid UserBucketId { get; set; }
-        public int Percentage { get; set; }
+        public decimal Percentage { get; set; }
         public Guid UserId { get; set; }
         public Guid BucketId { get; set; }
         [ForeignKey("BucketId")]

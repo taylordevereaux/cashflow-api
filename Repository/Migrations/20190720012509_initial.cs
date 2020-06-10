@@ -14,12 +14,6 @@ namespace CashFlow.Api.Migrations
             migrationBuilder.EnsureSchema(
                 name: "Lookup");
 
-            migrationBuilder.EnsureSchema(
-                name: "Budget");
-
-            migrationBuilder.EnsureSchema(
-                name: "UBudget");
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
